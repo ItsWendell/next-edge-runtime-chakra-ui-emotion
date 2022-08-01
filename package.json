@@ -6,20 +6,20 @@
     "start": "next start"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^2.0.2",
-    "@chakra-ui/react": "^2.2.1",
-    "@chakra-ui/theme-tools": "^2.0.2",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.9.0",
-    "framer-motion": "^6.3.0",
+    "@chakra-ui/icons": "latest",
+    "@chakra-ui/react": "latest",
+    "@chakra-ui/theme-tools": "latest",
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "framer-motion": "latest",
     "next": "latest",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "latest",
+    "react-dom": "latest"
   },
   "devDependencies": {
-    "@types/node": "^18.0.0",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
     "typescript": "^4.7.2"
   }
 }
