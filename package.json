@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "info": "next info"
   },
   "dependencies": {
     "@chakra-ui/icons": "latest",
@@ -13,7 +14,7 @@
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "latest",
     "framer-motion": "latest",
-    "next": "canary",
+    "next": "^12.2.4-canary.8",
     "react": "latest",
     "react-dom": "latest"
   },
