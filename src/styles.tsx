@@ -59,7 +59,7 @@ export const Combined = styled.div`
 `;
 
 export const Animated = styled.div<{
-    animation: Keyframes
+  animation: Keyframes;
 }>`
   ${basicStyles};
   ${hoverStyles};

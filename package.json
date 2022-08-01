@@ -9,6 +9,7 @@
     "@chakra-ui/icons": "latest",
     "@chakra-ui/react": "latest",
     "@chakra-ui/theme-tools": "latest",
+    "@emotion/cache": "^11.10.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "latest",
     "framer-motion": "latest",
