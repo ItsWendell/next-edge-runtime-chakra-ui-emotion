@@ -27,7 +27,11 @@ import { GetServerSideProps, PageConfig } from "next";
 import { useState } from "react";
 import Link from "next/link";
 
-const Index = (props: { runtime?: string; isServer?: boolean }) => {
+const Index = (props: {
+  runtime?: string;
+  isServer?: boolean;
+  url?: string;
+}) => {
   return (
     <ChakraProvider theme={theme}>
       <Container height="100vh">
@@ -65,10 +69,23 @@ const Index = (props: { runtime?: string; isServer?: boolean }) => {
             !
           </Text>
 
-          <Stack direction="row"> 
-            <Button variant="solid" colorScheme="blue" as="a" href={window.location.href}>Reload</Button>
+          <Stack direction="row">
+            <Button
+              variant="solid"
+              colorScheme="blue"
+              as="a"
+              href={
+                props.url ?? typeof window !== "undefined"
+                  ? window.location.href
+                  : "#"
+              }
+            >
+              Reload
+            </Button>
             <Link href="/" passHref>
-              <Button variant="outline" colorScheme="blue" as="a" href={window.location.href}>Back to emotion demo</Button>
+              <Button variant="outline" colorScheme="blue" as="a">
+                Back to emotion demo
+              </Button>
             </Link>
           </Stack>
           <List spacing={3} my={0} color="text">
@@ -137,6 +154,7 @@ export const config = {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return {
     props: {
+      url: ctx.req.url,
       isServer: true,
       runtime: process.env.NEXT_RUNTIME,
     },
