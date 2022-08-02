@@ -17,22 +17,19 @@ import { DarkModeSwitch } from "../components/DarkModeSwitch";
 import { CTA } from "../components/CTA";
 import { Footer } from "../components/Footer";
 import { GetServerSideProps, PageConfig } from "next";
-import createCache from "@emotion/cache";
-import { CacheProvider } from "@emotion/react";
+import { useState } from "react";
 
-const cache = createCache({
-  key: `chakra-cache`,
-});
-
-const Index = ({ runtime }) => (
-  <CacheProvider value={cache}>
+const Index = (props: { runtime?: string }) => {
+  const [runtime, setRuntime] = useState(props.runtime ?? "unknown");
+  return (
     <ChakraProvider theme={theme}>
       <Container height="100vh">
         <Hero />
         <Main>
           <Text color="text">
             Example repository of <Code>Next.js</Code> + <Code>chakra-ui</Code>{" "}
-            + <Code>TypeScript</Code>, with the runtime {runtime}.
+            + <Code>TypeScript</Code>, on the{" "}
+            <Code>{runtime ?? "unknown"}</Code> runtime!
           </Text>
 
           <List spacing={3} my={0} color="text">
@@ -68,8 +65,8 @@ const Index = ({ runtime }) => (
         <CTA />
       </Container>
     </ChakraProvider>
-  </CacheProvider>
-);
+  );
+};
 
 export const config = {
   runtime: "experimental-edge",

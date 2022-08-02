@@ -4,33 +4,27 @@ import { Animated, Basic, bounce, Combined } from "../styles";
 import createCache from "@emotion/cache";
 import Link from "next/link";
 
-const cache = createCache({
-  key: `emotion-cache`,
-});
-
 const Index = ({ runtime }) => (
-  <CacheProvider value={cache}>
-    <ThemeProvider
-      theme={{
-        colors: {
-          primary: "hotpink",
-        },
-      }}
-    >
-      <div>
-        <Basic>Cool Styles running on the runtime: {runtime}</Basic>
-        <Combined>
-          With <code>:hover</code>.
-        </Combined>
-        <Animated animation={bounce}>Let's bounce.</Animated>
-      </div>
-      <div>
-        <Link passHref href="/chakra">
-          <a>Visit Chakra demo</a>
-        </Link>
-      </div>
-    </ThemeProvider>
-  </CacheProvider>
+  <ThemeProvider
+    theme={{
+      colors: {
+        primary: "hotpink",
+      },
+    }}
+  >
+    <div>
+      <Basic>Cool Styles running on the runtime: {runtime}</Basic>
+      <Combined>
+        With <code>:hover</code>.
+      </Combined>
+      <Animated animation={bounce}>Let's bounce.</Animated>
+    </div>
+    <div>
+      <Link passHref href="/chakra">
+        <a>Visit Chakra demo</a>
+      </Link>
+    </div>
+  </ThemeProvider>
 );
 
 export const config = {
