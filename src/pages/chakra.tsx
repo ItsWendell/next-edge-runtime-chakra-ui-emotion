@@ -7,6 +7,13 @@ import {
   ListItem,
   ChakraProvider,
   theme,
+  Divider,
+  Heading,
+  Highlight,
+  Mark,
+  Box,
+  Button,
+  Stack,
 } from "@chakra-ui/react";
 import { CheckCircleIcon, LinkIcon } from "@chakra-ui/icons";
 
@@ -18,20 +25,52 @@ import { CTA } from "../components/CTA";
 import { Footer } from "../components/Footer";
 import { GetServerSideProps, PageConfig } from "next";
 import { useState } from "react";
+import Link from "next/link";
 
-const Index = (props: { runtime?: string }) => {
-  const [runtime, setRuntime] = useState(props.runtime ?? "unknown");
+const Index = (props: { runtime?: string; isServer?: boolean }) => {
   return (
     <ChakraProvider theme={theme}>
       <Container height="100vh">
         <Hero />
         <Main>
-          <Text color="text">
-            Example repository of <Code>Next.js</Code> + <Code>chakra-ui</Code>{" "}
-            + <Code>TypeScript</Code>, on the{" "}
-            <Code>{runtime ?? "unknown"}</Code> runtime!
+          <Box>
+            <Heading as="h1" fontWeight="bold" fontSize="3xl" color="text">
+              Example repository of
+            </Heading>
+            <Text mt={2} fontWeight={"black"} fontSize="5xl">
+              {" "}
+              <Mark bgGradient="linear(to-l, #7928CA, #FF0080)" bgClip="text">
+                Next.js
+              </Mark>{" "}
+              +{" "}
+              <Mark bgGradient="linear(to-l, #7928CA, #FF0080)" bgClip="text">
+                Chakra-UI
+              </Mark>{" "}
+              +{" "}
+              <Mark bgGradient="linear(to-l, #7928CA, #FF0080)" bgClip="text">
+                TypeScript
+              </Mark>
+            </Text>
+          </Box>
+
+          <Text>
+            This page is rendered on the{" "}
+            {props.isServer ? (
+              <>
+                <b>server</b> with the <b>{props.runtime}</b> runtime
+              </>
+            ) : (
+              <b>client</b>
+            )}
+            !
           </Text>
 
+          <Stack direction="row"> 
+            <Button variant="solid" colorScheme="blue" as="a" href={window.location.href}>Reload</Button>
+            <Link href="/" passHref>
+              <Button variant="outline" colorScheme="blue" as="a" href={window.location.href}>Back to emotion demo</Button>
+            </Link>
+          </Stack>
           <List spacing={3} my={0} color="text">
             <ListItem>
               <ListIcon as={CheckCircleIcon} color="green.500" />
@@ -55,6 +94,29 @@ const Index = (props: { runtime?: string }) => {
                 Next.js <LinkIcon />
               </ChakraLink>
             </ListItem>
+            <ListItem>
+              <ListIcon as={CheckCircleIcon} color="green.500" />
+              <ChakraLink
+                isExternal
+                href="https://emotion.sh/"
+                flexGrow={1}
+                mr={2}
+              >
+                Emotion <LinkIcon />
+              </ChakraLink>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListIcon as={CheckCircleIcon} color="green.500" />
+              <ChakraLink
+                isExternal
+                href="https://nextjs.org/docs/advanced-features/react-18/switchable-runtime"
+                flexGrow={1}
+                mr={2}
+              >
+                Next.js Edge Runtime <LinkIcon />
+              </ChakraLink>
+            </ListItem>
           </List>
         </Main>
 
@@ -75,6 +137,7 @@ export const config = {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return {
     props: {
+      isServer: true,
       runtime: process.env.NEXT_RUNTIME,
     },
   };

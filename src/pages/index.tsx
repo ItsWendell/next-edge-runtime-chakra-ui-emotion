@@ -4,7 +4,7 @@ import { Animated, Basic, bounce, Combined } from "../styles";
 import createCache from "@emotion/cache";
 import Link from "next/link";
 
-const Index = ({ runtime }) => (
+const Index = (props: { runtime?: string; isServer?: boolean }) => (
   <ThemeProvider
     theme={{
       colors: {
@@ -13,7 +13,17 @@ const Index = ({ runtime }) => (
     }}
   >
     <div>
-      <Basic>Cool Styles running on the runtime: {runtime}</Basic>
+      <Basic>
+        Cool Styles using Emotion running on the{" "}
+        {props.isServer ? (
+          <>
+            <b>server</b> with the <b>{props.runtime}</b> runtime
+          </>
+        ) : (
+          <b>client</b>
+        )}
+        !
+      </Basic>
       <Combined>
         With <code>:hover</code>.
       </Combined>
@@ -34,6 +44,7 @@ export const config = {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return {
     props: {
+      isServer: true,
       runtime: process.env.NEXT_RUNTIME,
     },
   };
