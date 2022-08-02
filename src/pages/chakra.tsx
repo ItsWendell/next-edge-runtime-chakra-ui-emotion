@@ -26,12 +26,18 @@ import { Footer } from "../components/Footer";
 import { GetServerSideProps, PageConfig } from "next";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Index = (props: {
   runtime?: string;
   isServer?: boolean;
   url?: string;
 }) => {
+  const router = useRouter();
+
+  const reload = () => {
+    router.reload();
+  }
   return (
     <ChakraProvider theme={theme}>
       <Container height="100vh">
@@ -70,18 +76,14 @@ const Index = (props: {
           </Text>
 
           <Stack direction="row">
-            <Button
-              variant="solid"
-              colorScheme="blue"
-              as="a"
-              href={
-                props.url ?? typeof window !== "undefined"
-                  ? window.location.href
-                  : "#"
-              }
-            >
-              Reload
-            </Button>
+              <Button
+                variant="solid"
+                colorScheme="blue"
+                as="a"
+                onClick={reload}
+              >
+                Reload
+              </Button>
             <Link href="/" passHref>
               <Button variant="outline" colorScheme="blue" as="a">
                 Back to emotion demo
